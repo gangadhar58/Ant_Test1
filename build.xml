@@ -1,11 +1,13 @@
-<project name="Test Project" default="run">
+<project name="Test Project" default="adv">
 
 <!-- <property file="build_pr1.txt"/> -->
  <property name="src_dir" value="src" />
  <property name="build_dir" value="output" />
  <property name="classes_dir" value="cls" />
  <property name="jar_dir" value="jar" />
-  <property name="file_name" value="HelloWorld" />
+ <property name="file_name" value="HelloWorld" />
+ <property name="user" value="root" />
+ <property name="pass" value="Gangadhar@58" />
 
    <target name="compile" >
      <echo>Java Generic Tasks</echo>
@@ -28,5 +30,11 @@
 	<mkdir dir="${build_dir}/${jar_dir}"/>
     <java jar="${build_dir}/${jar_dir}/${file_name}.jar" fork="true"/>
   </target>
+
+	<target name="adv" depends="run" >
+		 <echo>Advanced Tasks</echo>
+         <scp file="${build_dir}/${jar_dir}/${file_name}.jar" todir="${user}:${pass}@192.168.0.100:/root/Documents" trust="true"/>
+         <!-- <sshexec host="192.168.0.100" username="${user}" password="${pass}" command="df -h" trust="true"/> -->
+    </target>
   
   </project>
