@@ -1,0 +1,32 @@
+<project name="Test Project" default="run">
+
+<!-- <property file="build_pr1.txt"/> -->
+ <property name="src_dir" value="src" />
+ <property name="build_dir" value="output" />
+ <property name="classes_dir" value="cls" />
+ <property name="jar_dir" value="jar" />
+  <property name="file_name" value="HelloWorld" />
+
+   <target name="compile" >
+     <echo>Java Generic Tasks</echo>
+	  <delete dir="${build_dir}"/> 
+      <mkdir dir="${build_dir}/${classes_dir}"/>
+      <javac srcdir="${src_dir}" destdir="${build_dir}/${classes_dir}"/>
+   </target>
+
+   <target name="package"  depends="compile">
+    <echo>Java Packaging</echo><mkdir dir="${build_dir}/${jar_dir}"/>
+	 <jar basedir="${build_dir}/${classes_dir}" destfile="${build_dir}/${jar_dir}/${file_name}.jar">
+       <manifest >
+	    <attribute name="Main-Class" value="${file_name}"/>
+	   </manifest>
+	 </jar>
+  </target>
+
+  <target name="run"  depends="package">
+    <echo>Run the File</echo>
+	<mkdir dir="${build_dir}/${jar_dir}"/>
+    <java jar="${build_dir}/${jar_dir}/${file_name}.jar" fork="true"/>
+  </target>
+  
+  </project>
