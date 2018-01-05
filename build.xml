@@ -25,13 +25,13 @@
 	 </jar>
   </target>
 
-  <target name="run"  depends="package">
+  <!--<target name="run"  depends="package">
     <echo>Run the File</echo>
 	<mkdir dir="${build_dir}/${jar_dir}"/>
     <java jar="${build_dir}/${jar_dir}/${file_name}.jar" fork="true"/>
-  </target>
+  </target> -->
 
-	<target name="adv" depends="run" >
+	<target name="adv" depends="package" >
 		 <echo>Advanced Tasks</echo>
          <scp file="${build_dir}/${jar_dir}/${file_name}.jar" todir="${user}:${pass}@192.168.0.100:/root/Documents" trust="true"/>
          <!-- <sshexec host="192.168.0.100" username="${user}" password="${pass}" command="df -h" trust="true"/> -->
